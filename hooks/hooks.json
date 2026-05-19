@@ -2,39 +2,39 @@
   "version": 1,
   "hooks": {
     "sessionStart": [
-      { "command": "./hooks/session-resume.sh" }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-resume.sh" }
     ],
     "sessionEnd": [
-      { "command": "./hooks/session-finalize.sh" }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/session-finalize.sh" }
     ],
     "beforeSubmitPrompt": [
-      { "command": "./hooks/budget-guard.sh", "failClosed": true }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/budget-guard.sh", "failClosed": true }
     ],
     "preToolUse": [
       {
-        "command": "./hooks/tool-guard.sh",
+        "command": "${CLAUDE_PLUGIN_ROOT}/hooks/tool-guard.sh",
         "matcher": "Shell|Read|Write|Edit|Grep",
         "timeout": 5
       }
     ],
     "postToolUse": [
-      { "command": "./hooks/checkpoint.sh" }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/checkpoint.sh" }
     ],
     "afterFileEdit": [
-      { "command": "./hooks/checkpoint.sh" }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/checkpoint.sh" }
     ],
     "postToolUseFailure": [
-      { "command": "./hooks/failure-recorder.sh" }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/failure-recorder.sh" }
     ],
     "beforeShellExecution": [
       {
-        "command": "./hooks/shell-guard.sh",
+        "command": "${CLAUDE_PLUGIN_ROOT}/hooks/shell-guard.sh",
         "matcher": "rm -rf|DROP TABLE|kubectl delete|git push --force|:>\\s",
         "failClosed": true
       }
     ],
     "stop": [
-      { "command": "./hooks/auto-refine.sh", "loop_limit": 3 }
+      { "command": "${CLAUDE_PLUGIN_ROOT}/hooks/auto-refine.sh", "loop_limit": 3 }
     ]
   }
 }

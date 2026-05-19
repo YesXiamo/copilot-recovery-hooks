@@ -60,6 +60,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -f "$SCRIPT_DIR/hooks.json" ] && [ -d "$SCRIPT_DIR/hooks" ]; then
   say "本地模式:从仓库目录复制"
   cp "$SCRIPT_DIR/hooks.json" "$HOOKS_JSON"
+  # 插件模式用 ./hooks/ 路径,手动安装模式用 .aone_copilot/hooks/ 路径
+  sed -i "" "s|\./hooks/|.aone_copilot/hooks/|g" "$HOOKS_JSON"
   for h in "${HOOKS[@]}"; do
     cp "$SCRIPT_DIR/hooks/$h" "$TARGET/.aone_copilot/hooks/$h"
     chmod +x "$TARGET/.aone_copilot/hooks/$h"
@@ -68,6 +70,8 @@ if [ -f "$SCRIPT_DIR/hooks.json" ] && [ -d "$SCRIPT_DIR/hooks" ]; then
 else
   say "远程模式:从 $RAW_BASE 下载"
   curl -fsSL "$RAW_BASE/hooks.json" -o "$HOOKS_JSON" || die "下载 hooks.json 失败"
+  # 插件模式用 ./hooks/ 路径,手动安装模式用 .aone_copilot/hooks/ 路径
+  sed -i "" "s|\./hooks/|.aone_copilot/hooks/|g" "$HOOKS_JSON"
   for h in "${HOOKS[@]}"; do
     curl -fsSL "$RAW_BASE/hooks/$h" -o "$TARGET/.aone_copilot/hooks/$h" || die "下载 $h 失败"
     chmod +x "$TARGET/.aone_copilot/hooks/$h"

@@ -1,0 +1,23 @@
+{
+  "name": "copilot-recovery-hooks",
+  "displayName": "Copilot Recovery Hooks",
+  "description": "8 个 hook 脚本实现 5 层自动恢复机制：预算守卫、工具熔断、Reflexion 自动反思、跨会话断点续传、破坏性命令拦截",
+  "version": "0.1.0",
+  "author": {
+    "name": "YesXiamo",
+    "email": "yesxiamo@example.com"
+  },
+  "homepage": "https://github.com/YesXiamo/copilot-recovery-hooks",
+  "repository": "https://github.com/YesXiamo/copilot-recovery-hooks",
+  "license": "MIT",
+  "keywords": [
+    "recovery",
+    "hooks",
+    "reflexion",
+    "checkpoint",
+    "circuit-breaker",
+    "auto-refine",
+    "session-resume"
+  ],
+  "hooks": "./hooks.json"
+}

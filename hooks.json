@@ -2,39 +2,39 @@
   "version": 1,
   "hooks": {
     "sessionStart": [
-      { "command": ".aone_copilot/hooks/session-resume.sh" }
+      { "command": "./hooks/session-resume.sh" }
     ],
     "sessionEnd": [
-      { "command": ".aone_copilot/hooks/session-finalize.sh" }
+      { "command": "./hooks/session-finalize.sh" }
     ],
     "beforeSubmitPrompt": [
-      { "command": ".aone_copilot/hooks/budget-guard.sh", "failClosed": true }
+      { "command": "./hooks/budget-guard.sh", "failClosed": true }
     ],
     "preToolUse": [
       {
-        "command": ".aone_copilot/hooks/tool-guard.sh",
+        "command": "./hooks/tool-guard.sh",
         "matcher": "Shell|Read|Write|Edit|Grep",
         "timeout": 5
       }
     ],
     "postToolUse": [
-      { "command": ".aone_copilot/hooks/checkpoint.sh" }
+      { "command": "./hooks/checkpoint.sh" }
     ],
     "afterFileEdit": [
-      { "command": ".aone_copilot/hooks/checkpoint.sh" }
+      { "command": "./hooks/checkpoint.sh" }
     ],
     "postToolUseFailure": [
-      { "command": ".aone_copilot/hooks/failure-recorder.sh" }
+      { "command": "./hooks/failure-recorder.sh" }
     ],
     "beforeShellExecution": [
       {
-        "command": ".aone_copilot/hooks/shell-guard.sh",
+        "command": "./hooks/shell-guard.sh",
         "matcher": "rm -rf|DROP TABLE|kubectl delete|git push --force|:>\\s",
         "failClosed": true
       }
     ],
     "stop": [
-      { "command": ".aone_copilot/hooks/auto-refine.sh", "loop_limit": 3 }
+      { "command": "./hooks/auto-refine.sh", "loop_limit": 3 }
     ]
   }
 }

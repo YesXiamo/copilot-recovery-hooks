@@ -2,9 +2,9 @@
   "_comment": "只观测,不拦截 — 适合先开三天看看会发生什么,再决定要不要打开自动续发。",
   "version": 1,
   "hooks": {
-    "postToolUse":        [{ "command": ".aone_copilot/hooks/checkpoint.sh" }],
-    "afterFileEdit":      [{ "command": ".aone_copilot/hooks/checkpoint.sh" }],
-    "postToolUseFailure": [{ "command": ".aone_copilot/hooks/failure-recorder.sh" }],
-    "sessionEnd":         [{ "command": ".aone_copilot/hooks/session-finalize.sh" }]
+    "postToolUse":        [{ "command": "./hooks/checkpoint.sh" }],
+    "afterFileEdit":      [{ "command": "./hooks/checkpoint.sh" }],
+    "postToolUseFailure": [{ "command": "./hooks/failure-recorder.sh" }],
+    "sessionEnd":         [{ "command": "./hooks/session-finalize.sh" }]
   }
 }

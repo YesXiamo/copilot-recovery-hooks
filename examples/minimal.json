@@ -3,13 +3,13 @@
   "version": 1,
   "hooks": {
     "postToolUse": [
-      { "command": ".aone_copilot/hooks/checkpoint.sh" }
+      { "command": "./hooks/checkpoint.sh" }
     ],
     "postToolUseFailure": [
-      { "command": ".aone_copilot/hooks/failure-recorder.sh" }
+      { "command": "./hooks/failure-recorder.sh" }
     ],
     "stop": [
-      { "command": ".aone_copilot/hooks/auto-refine.sh", "loop_limit": 3 }
+      { "command": "./hooks/auto-refine.sh", "loop_limit": 3 }
     ]
   }
 }

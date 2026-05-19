@@ -1,0 +1,12 @@
+# 本项目自带状态目录(开发时如果跑过 ./install.sh . 会生成)
+.aone_copilot/state/
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# Test fixtures
+/tmp/
+*.log

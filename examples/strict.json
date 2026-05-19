@@ -1,0 +1,18 @@
+{
+  "_comment": "严格模式 — 在 default 基础上,加大破坏性命令黑名单 + 收紧预算到 30 轮。适合生产/共享仓库。",
+  "version": 1,
+  "hooks": {
+    "sessionStart":         [{ "command": ".aone_copilot/hooks/session-resume.sh" }],
+    "sessionEnd":           [{ "command": ".aone_copilot/hooks/session-finalize.sh" }],
+    "beforeSubmitPrompt":   [{ "command": ".aone_copilot/hooks/budget-guard.sh", "failClosed": true, "_env_budget": 30 }],
+    "preToolUse":           [{ "command": ".aone_copilot/hooks/tool-guard.sh",
+                               "matcher": "Shell|Read|Write|Edit|Grep", "timeout": 5 }],
+    "postToolUse":          [{ "command": ".aone_copilot/hooks/checkpoint.sh" }],
+    "afterFileEdit":        [{ "command": ".aone_copilot/hooks/checkpoint.sh" }],
+    "postToolUseFailure":   [{ "command": ".aone_copilot/hooks/failure-recorder.sh" }],
+    "beforeShellExecution": [{ "command": ".aone_copilot/hooks/shell-guard.sh",
+                               "matcher": "rm -rf|DROP TABLE|TRUNCATE|kubectl delete|git push --force|git push -f|:>\\s|sudo |chmod 777|mv /|dd if=",
+                               "failClosed": true }],
+    "stop":                 [{ "command": ".aone_copilot/hooks/auto-refine.sh", "loop_limit": 2 }]
+  }
+}

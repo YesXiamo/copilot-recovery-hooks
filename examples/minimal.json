@@ -1,0 +1,15 @@
+{
+  "_comment": "最小集 — 只保留 L3 自动反思 + L4 checkpoint。适合先尝鲜。",
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      { "command": ".aone_copilot/hooks/checkpoint.sh" }
+    ],
+    "postToolUseFailure": [
+      { "command": ".aone_copilot/hooks/failure-recorder.sh" }
+    ],
+    "stop": [
+      { "command": ".aone_copilot/hooks/auto-refine.sh", "loop_limit": 3 }
+    ]
+  }
+}

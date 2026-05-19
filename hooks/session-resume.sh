@@ -1,8 +1,24 @@
 #!/bin/bash
 INPUT=$(cat)
 TRACE=$(echo "$INPUT" | jq -r '.trace_id')
+SESSION=$(echo "$INPUT" | jq -r '.session_id')
 CKPT_DIR=".aone_copilot/state/checkpoints/$TRACE"
+SESSION_MARKER=".aone_copilot/state/current-session"
 
+# 如果当前 session 已经标记过,说明不是跨会话恢复,直接放行
+if [ -f "$SESSION_MARKER" ]; then
+  PREV_SESSION=$(cat "$SESSION_MARKER" 2>/dev/null)
+  if [ "$PREV_SESSION" = "$SESSION" ]; then
+    echo '{}'
+    exit 0
+  fi
+fi
+
+# 标记当前 session
+mkdir -p "$(dirname "$SESSION_MARKER")"
+echo "$SESSION" > "$SESSION_MARKER"
+
+# 如果没有 checkpoint 目录,放行
 [ -d "$CKPT_DIR" ] || { echo '{}'; exit 0; }
 
 DONE=$(ls "$CKPT_DIR" 2>/dev/null | wc -l | tr -d ' ')
